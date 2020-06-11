@@ -3,7 +3,7 @@ import {
   Kind,
 } from "https://cdn.pika.dev/graphql@^15.0.0";
 
-const DateScalar = new GraphQLScalarType({
+export const DateScalar = new GraphQLScalarType({
   name: "Date",
   description: "Date custom scalar type",
   parseValue(value: string) {
@@ -20,5 +20,3 @@ const DateScalar = new GraphQLScalarType({
     return null;
   },
 });
-
-export default date;
