@@ -4,6 +4,7 @@ import {
 
 const types = (gql as any)`
   scalar Date
+  scalar URL
 
   type Post {
     id: ID
@@ -13,6 +14,8 @@ const types = (gql as any)`
     dateCreated: Date
     dateModified: Date
     tags: [String]
+    description : String
+    coverImage: URL
   }
 
   input PostInput {

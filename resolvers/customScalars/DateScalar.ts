@@ -10,7 +10,6 @@ export const DateScalar = new GraphQLScalarType({
     return new Date(value); // value from the client
   },
   serialize(value: Date) {
-    console.log(value.getTime());
     return value.getTime(); // value sent to the client
   },
   parseLiteral(ast: any) {
