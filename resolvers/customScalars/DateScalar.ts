@@ -7,7 +7,8 @@ export const DateScalar = new GraphQLScalarType({
   name: "Date",
   description: "Date custom scalar type",
   parseValue(value: string) {
-    return new Date(value); // value from the client
+    const dateType = new Date(value);
+    return dateType; // value from the client
   },
   serialize(value: Date) {
     return value.getTime(); // value sent to the client

@@ -5,21 +5,32 @@ const dbPosts = db.instance.collection("posts");
 export const PostMutation = {
   addPost: async (
     parent: any,
-    { input:{title, author, htmlContent, dateCreated,dateModified,tags} }: any,
+    {
+      input:{title, author, htmlContent, dateCreated,tags, coverImage, description},
+    }: any,
     context: any,
     info: any,
   ) => {
     const { "\$oid":id } = await dbPosts.insertOne(
-      { title, author, htmlContent, dateCreated, dateModified, tags },
+      {
+        title,
+        author,
+        htmlContent,
+        dateCreated,
+        tags,
+        coverImage,
+        description,
+      },
     );
     return {
       title,
       author,
       htmlContent,
       dateCreated,
-      dateModified,
       tags,
       id,
+      coverImage,
+      description,
     };
   },
 };

@@ -1,7 +1,7 @@
 import { MongoClient, init } from "https://deno.land/x/mongo@v0.8.0/mod.ts";
-const dbConnectionString =
-  "mongodb+srv://graphqlUser:Test1234@graphql-blog-wtf1c.azure.mongodb.net/blog?retryWrites=true&w=majority";
-const dbName = "blog";
+import "https://deno.land/x/dotenv/load.ts";
+const dbConnectionString: string = Deno.env.get("dbConnectionString")!;
+const dbName: string = Deno.env.get("dbName")!;
 
 class DB {
   public client: MongoClient;

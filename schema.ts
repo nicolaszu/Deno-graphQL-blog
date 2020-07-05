@@ -23,14 +23,21 @@ const types = (gql as any)`
     author: String
     htmlContent: String
     dateCreated: Date
-    dateModified: Date
+    description: String
     tags: [String]
+    coverImage: URL
+  }
+  
+  type PostsResult{
+    posts: [Post]
+    totalCount: Int
   }
 
   type Query {
     post(id: ID): Post
-    posts: [Post]
+    posts(limit: Int, offset: Int): PostsResult
     tag(name: String): [Post]
+    searchPosts(limit: Int, offset: Int, filter: String): PostsResult
   }
 
   type Mutation {
