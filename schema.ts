@@ -5,6 +5,7 @@ import {
 const types = (gql as any)`
   scalar Date
   scalar URL
+  scalar Void
 
   type Post {
     id: ID
@@ -15,7 +16,7 @@ const types = (gql as any)`
     dateModified: Date
     tags: [String]
     description : String
-    coverImage: URL
+    coverImage: String
   }
 
   input PostInput {
@@ -25,7 +26,7 @@ const types = (gql as any)`
     dateCreated: Date
     description: String
     tags: [String]
-    coverImage: URL
+    coverImage: String
   }
   
   type PostsResult{
@@ -42,6 +43,8 @@ const types = (gql as any)`
 
   type Mutation {
     addPost(input: PostInput): Post!
+    deletePost(id: ID): ID
+    editPost(input: PostInput, id:ID): Post!
   }
 `;
 
