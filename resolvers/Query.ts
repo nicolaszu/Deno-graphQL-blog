@@ -18,26 +18,24 @@ export const Query = {
   ) => {
     const limitClause = limit ? { $limit: limit } : ""; // if zero return all
     const allPosts = await dbPosts.aggregate(
-      [{ $skip: offset }, limitClause],
+      [
+        {
+          $sort: {
+            dateCreated: -1,
+          },
+        },
+        { $skip: offset },
+        limitClause,
+      ],
     );
     let resultPosts = allPosts.map((post: any) => {
-      const { _id:{ "\$oid":id } } = post;
+      const { _id: { "\$oid": id } } = post;
       post.id = id;
       return post;
     });
     let resultCount = dbPosts.count({});
     return { posts: resultPosts, totalCount: resultCount };
   },
-
-  tag: async (parent: any, { name }: any, context: any, info: any) => {
-    const allPosts = await dbPosts.find({ tags: name });
-    return allPosts.map((post: any) => {
-      const { _id:{ "\$oid":id } } = post;
-      post.id = id;
-      return post;
-    });
-  },
-
   searchPosts: async (
     parent: any,
     { limit, offset, filter }: any,
@@ -66,7 +64,7 @@ export const Query = {
         },
       ]);
       let resultPosts = searchPosts[0].results.map((post: any) => {
-        const { _id:{ "\$oid":id } } = post;
+        const { _id: { "\$oid": id } } = post;
         post.id = id;
         return post;
       });

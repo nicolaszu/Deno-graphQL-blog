@@ -9,8 +9,10 @@ export const PostMutation = {
     {
       input: {
         title,
+        type,
         author,
         htmlContent,
+        urlContent,
         dateCreated,
         tags,
         coverImage,
@@ -20,21 +22,23 @@ export const PostMutation = {
     context: any,
     info: any,
   ) => {
-    const { "\$oid": id } = await dbPosts.insertOne(
-      {
-        title,
-        author,
-        htmlContent,
-        dateCreated,
-        tags,
-        coverImage,
-        description,
-      },
-    );
-    return {
+    const { $oid: id } = await dbPosts.insertOne({
       title,
+      type,
       author,
       htmlContent,
+      urlContent,
+      dateCreated,
+      tags,
+      coverImage,
+      description,
+    });
+    return {
+      title,
+      type,
+      author,
+      htmlContent,
+      urlContent,
       dateCreated,
       tags,
       id,
@@ -42,14 +46,9 @@ export const PostMutation = {
       description,
     };
   },
-  deletePost: async (
-    parent: any,
-    { id }: any,
-    context: any,
-    info: any,
-  ) => {
+  deletePost: async (parent: any, { id }: any, context: any, info: any) => {
     const postId = ObjectId(id);
-    await dbPosts.deleteOne({ "_id": postId });
+    await dbPosts.deleteOne({ _id: postId });
     return id;
   },
   editPost: async (
@@ -57,8 +56,10 @@ export const PostMutation = {
     {
       input: {
         title,
+        type,
         author,
         htmlContent,
+        urlContent,
         dateCreated,
         tags,
         coverImage,
@@ -75,15 +76,27 @@ export const PostMutation = {
       {
         $set: {
           title,
+          type,
           author,
           htmlContent,
+          urlContent,
           tags,
           coverImage,
           description,
         },
       },
     );
-    const post = await dbPosts.findOne({ "_id": postId });
+    if (coverImage === "Delete") {
+      await dbPosts.updateOne(
+        { _id: { $eq: postId } },
+        {
+          $unset: {
+            coverImage,
+          },
+        },
+      );
+    }
+    const post = await dbPosts.findOne({ _id: postId });
     return { ...post, id };
   },
 };

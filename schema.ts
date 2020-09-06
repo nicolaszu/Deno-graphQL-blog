@@ -6,12 +6,15 @@ const types = (gql as any)`
   scalar Date
   scalar URL
   scalar Void
-
+  scalar PostType
+  
   type Post {
     id: ID
+    type: PostType
     title: String
     author: String
     htmlContent: String
+    urlContent:URL
     dateCreated: Date
     dateModified: Date
     tags: [String]
@@ -20,9 +23,11 @@ const types = (gql as any)`
   }
 
   input PostInput {
+    type:PostType
     title: String
     author: String
     htmlContent: String
+    urlContent: URL
     dateCreated: Date
     description: String
     tags: [String]
@@ -37,7 +42,6 @@ const types = (gql as any)`
   type Query {
     post(id: ID): Post
     posts(limit: Int, offset: Int): PostsResult
-    tag(name: String): [Post]
     searchPosts(limit: Int, offset: Int, filter: String): PostsResult
   }
 
