@@ -2,7 +2,7 @@ import {
   GraphQLScalarType,
   GraphQLError,
   Kind,
-} from "https://cdn.pika.dev/graphql@^15.0.0";
+} from "../../deps.ts";
 
 export const URLScalar = new GraphQLScalarType({
   name: "URL",
@@ -14,7 +14,7 @@ export const URLScalar = new GraphQLScalarType({
   },
   parseLiteral(ast: any) {
     if (ast.kind !== Kind.STRING) {
-      throw new GraphQLError(
+      throw GraphQLError(
         `Can only validate strings as URLs but got a: ${ast.kind}`,
       );
     }

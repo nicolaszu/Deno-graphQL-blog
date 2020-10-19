@@ -1,7 +1,7 @@
 import db from "../config/db.ts";
 
 const dbPosts = db.instance.collection("posts");
-import { ObjectId } from "https://deno.land/x/mongo@v0.8.0/mod.ts";
+import { ObjectId } from "../deps.ts";
 
 export const Query = {
   post: async (parent: any, { id }: any, context: any, info: any) => {

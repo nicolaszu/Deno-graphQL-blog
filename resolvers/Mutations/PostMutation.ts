@@ -1,5 +1,5 @@
 import db from "../../config/db.ts";
-import { ObjectId } from "https://deno.land/x/mongo@v0.8.0/mod.ts";
+import { ObjectId } from "../../deps.ts";
 
 const dbPosts = db.instance.collection("posts");
 

@@ -1,12 +1,19 @@
 import {
   gql,
-} from "https://deno.land/x/oak_graphql/mod.ts";
+} from "./deps.ts";
 
 const types = (gql as any)`
   scalar Date
   scalar URL
   scalar Void
   scalar PostType
+
+  type User {
+    id: ID!
+    fName: String
+    lName: String
+    email: String
+  }
   
   type Post {
     id: ID
@@ -49,6 +56,8 @@ const types = (gql as any)`
     addPost(input: PostInput): Post!
     deletePost(id: ID): ID
     editPost(input: PostInput, id:ID): Post!
+    login (email: String!, password: String!): String
+    signup (fName:String!, lName:String!, email: String!, password: String!): String
   }
 `;
 

@@ -1,6 +1,6 @@
 import {
   GraphQLScalarType,
-} from "https://cdn.pika.dev/graphql@^15.0.0";
+} from "../../deps.ts";
 
 export const Void = new GraphQLScalarType({
   name: "Void",

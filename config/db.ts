@@ -1,4 +1,4 @@
-import { MongoClient, init } from "https://deno.land/x/mongo@v0.8.0/mod.ts";
+import { MongoClient, init } from "../deps.ts";
 import "https://deno.land/x/dotenv/load.ts";
 const dbConnectionString: string = Deno.env.get("dbConnectionString")!;
 const dbName: string = Deno.env.get("dbName")!;

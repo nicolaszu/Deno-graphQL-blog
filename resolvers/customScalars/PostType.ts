@@ -2,7 +2,7 @@ import {
   GraphQLScalarType,
   GraphQLError,
   Kind,
-} from "https://cdn.pika.dev/graphql@^15.0.0";
+} from "../../deps.ts";
 
 export const PostType = new GraphQLScalarType({
   name: "PostType",
@@ -19,11 +19,11 @@ export const PostType = new GraphQLScalarType({
       if (type === "LINK" || type === "WRITE") {
         return type;
       }
-      throw new GraphQLError(
+      throw GraphQLError(
         `Can only Process LINK and WRITE type, not ${type}`,
       );
     }
-    throw new GraphQLError(
+    throw GraphQLError(
       `Can only validate strings as URLs but got a: ${ast.kind}`,
     );
   },
